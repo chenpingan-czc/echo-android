@@ -222,7 +222,7 @@ private fun HomeContent(
 @Composable
 private fun HomeHeader(userName: String, avatarUrl: String) {
   Row(
-    modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp),
+    modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
     horizontalArrangement = Arrangement.SpaceBetween,
     verticalAlignment = Alignment.CenterVertically,
   ) {
@@ -291,8 +291,8 @@ private fun HorizontalScrollSection(
     SectionHeader(title = title, icon = icon, onMoreClick = onMoreClick)
     LazyRow(
       state = listState,
-      horizontalArrangement = Arrangement.spacedBy(16.dp),
-      contentPadding = PaddingValues(horizontal = 24.dp),
+      horizontalArrangement = Arrangement.spacedBy(8.dp),
+      contentPadding = PaddingValues(horizontal = 12.dp),
     ) {
       items(books, key = { it.id }) { book ->
         BookCard(book = book, width = 120.dp, onClick = { onBookClick(book.id) })
@@ -314,11 +314,11 @@ private fun GridSection(
   Column(modifier = Modifier.padding(bottom = 28.dp)) {
     SectionHeader(title = title, icon = icon)
     Column(
-      modifier = Modifier.padding(horizontal = 24.dp),
+      modifier = Modifier.padding(horizontal = 12.dp),
       verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
       books.chunked(3).forEach { rowBooks ->
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
           rowBooks.forEach { book ->
             Box(modifier = Modifier.weight(1f)) {
               BookCard(book = book, width = null, onClick = { onBookClick(book.id) })
@@ -341,7 +341,7 @@ private fun SectionHeader(
   onMoreClick: (() -> Unit)? = null,
 ) {
   Row(
-    modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp).padding(bottom = 12.dp),
+    modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp).padding(bottom = 12.dp),
     verticalAlignment = Alignment.CenterVertically,
   ) {
     Row(
@@ -431,7 +431,7 @@ private fun BookCard(
       fontSize = 13.sp,
       fontWeight = FontWeight.Bold,
       color = if (isProcessing) Orange500 else Orange900,
-      maxLines = 1,
+      maxLines = 2,
       overflow = TextOverflow.Ellipsis,
       textAlign = TextAlign.Center,
       modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp),
