@@ -51,11 +51,15 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     val state = _uiState.value
     if (state.phone.length != 11 || state.countdown > 0) return
 
+    _uiState.value = _uiState.value.copy(countdown = 60)
+
     viewModelScope.launch {
-      _uiState.value = _uiState.value.copy(countdown = 60)
       try {
         authApi.sendCode(SendCodeRequest(state.phone, SendCodeRequest.TYPE_LOGIN))
       } catch (_: Exception) {}
+    }
+
+    viewModelScope.launch {
       while (_uiState.value.countdown > 0) {
         delay(1000)
         _uiState.value = _uiState.value.copy(countdown = _uiState.value.countdown - 1)
