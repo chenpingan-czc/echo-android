@@ -25,6 +25,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -76,6 +77,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
@@ -91,6 +93,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -602,26 +605,27 @@ private fun CameraHeader(
       }
 
       if (capturedImages.isEmpty()) {
-        Box(modifier = Modifier.weight(1f).padding(horizontal = 8.dp), contentAlignment = Alignment.Center) {
-          Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Box(
-              modifier =
-                Modifier.clip(CircleShape)
-                  .background(Orange500)
-                  .border(2.dp, Orange400, CircleShape)
-                  .padding(horizontal = 20.dp, vertical = 8.dp),
-              contentAlignment = Alignment.Center,
-            ) {
-              Text(
-                text = stringResource(R.string.upload_need_cover),
-                color = Color.White,
-                fontWeight = FontWeight.Black,
-                fontSize = 18.sp,
-                letterSpacing = 1.sp,
-              )
-            }
-            Spacer(modifier = Modifier.height(12.dp))
+        Column(
+          modifier = Modifier.weight(1f).padding(horizontal = 8.dp),
+          horizontalAlignment = Alignment.CenterHorizontally,
+          verticalArrangement = Arrangement.Center,
+        ) {
+          Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally),
+            verticalAlignment = Alignment.CenterVertically,
+          ) {
+            DemoCoverHint(painterResource(R.drawable.demo1))
+            DemoCoverHint(painterResource(R.drawable.demo2))
+            DemoCoverHint(painterResource(R.drawable.demo3))
           }
+          Spacer(modifier = Modifier.height(8.dp))
+          Text(
+            text = stringResource(R.string.upload_demo_hint),
+            color = Color.White.copy(alpha = 0.9f),
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Medium,
+            letterSpacing = 0.5.sp,
+          )
         }
         VoiceButton(onClick = onVoiceClick)
       } else {
@@ -639,6 +643,20 @@ private fun CameraHeader(
       }
     }
   }
+}
+
+@Composable
+private fun DemoCoverHint(painter: androidx.compose.ui.graphics.painter.Painter) {
+  Image(
+    painter = painter,
+    contentDescription = null,
+    contentScale = ContentScale.Crop,
+    modifier = Modifier
+      .size(68.dp, 52.dp)
+      .clip(RoundedCornerShape(10.dp))
+      .border(1.5.dp, Color.White.copy(alpha = 0.7f), RoundedCornerShape(10.dp))
+      .rotate(180f),
+  )
 }
 
 @Composable

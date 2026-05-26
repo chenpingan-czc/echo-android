@@ -91,6 +91,7 @@
     <string name="upload_camera_unavailable">Can\'t access the camera</string>
     <string name="upload_camera_hint">Tap the button on the bottom left to pick from your gallery,\nor check your camera permission settings</string>
     <string name="upload_need_cover">Please take a cover photo first</string>
+    <string name="upload_demo_hint">Capture the entire book</string>
     <string name="upload_choose_voice">Choose a storytelling voice</string>
     <string name="upload_choose_voice_cd">Choose voice</string>
     <string name="upload_record_my_voice">Record My Voice</string>

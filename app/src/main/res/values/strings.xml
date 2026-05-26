@@ -91,6 +91,7 @@
     <string name="upload_camera_unavailable">无法访问相机</string>
     <string name="upload_camera_hint">您可以点击左下角按钮从相册中选择图片，\n或检查相机权限设置</string>
     <string name="upload_need_cover">请先拍摄封面</string>
+    <string name="upload_demo_hint">需要拍摄整本书哦</string>
     <string name="upload_choose_voice">选择讲故事的声音</string>
     <string name="upload_choose_voice_cd">选择音色</string>
     <string name="upload_record_my_voice">去录制我的声音</string>

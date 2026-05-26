@@ -24,9 +24,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -50,27 +47,24 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.hope.echo.R
+import com.hope.echo.ui.component.WheelPicker
 import com.hope.echo.ui.theme.Gray300
 import com.hope.echo.ui.theme.Gray600
 import com.hope.echo.ui.theme.Green500
@@ -81,7 +75,6 @@ import com.hope.echo.ui.theme.Orange500
 import com.hope.echo.ui.theme.Orange900
 import com.hope.echo.ui.viewmodel.EditProfileViewModel
 import java.util.Calendar
-import kotlin.math.abs
 
 private val ScreenBackground = Color(0xFFFDF8F5)
 
@@ -567,107 +560,6 @@ private fun DateWheelPickerDialog(
           }
         }
       }
-    }
-  }
-}
-
-private const val WHEEL_VISIBLE_ITEMS = 5
-private val WHEEL_ITEM_HEIGHT = 48.dp
-
-@Composable
-private fun <T> WheelPicker(
-  items: List<T>,
-  selectedItem: T,
-  onItemSelected: (T) -> Unit,
-  label: @Composable (T) -> String,
-  modifier: Modifier = Modifier,
-) {
-  val halfVisible = WHEEL_VISIBLE_ITEMS / 2
-  val listState = rememberLazyListState()
-  val itemHeightPx = with(LocalDensity.current) { WHEEL_ITEM_HEIGHT.toPx() }
-
-  val initialIndex = remember(items, selectedItem) {
-    items.indexOf(selectedItem).coerceAtLeast(0)
-  }
-
-  LaunchedEffect(items, selectedItem) {
-    val idx = items.indexOf(selectedItem).coerceAtLeast(0)
-    listState.scrollToItem(idx)
-  }
-
-  LaunchedEffect(listState) {
-    snapshotFlow { listState.isScrollInProgress }
-      .collect { scrolling ->
-        if (!scrolling) {
-          val offset = listState.firstVisibleItemScrollOffset
-          val index = listState.firstVisibleItemIndex
-          val snappedIndex = if (offset > itemHeightPx / 2) index + 1 else index
-          val clampedIndex = snappedIndex.coerceIn(0, items.size - 1)
-          if (clampedIndex != listState.firstVisibleItemIndex ||
-            listState.firstVisibleItemScrollOffset != 0
-          ) {
-            listState.animateScrollToItem(clampedIndex)
-          }
-          if (items[clampedIndex] != selectedItem) {
-            onItemSelected(items[clampedIndex])
-          }
-        }
-      }
-  }
-
-  val topFade = Brush.verticalGradient(
-    0f to Color.White,
-    0.3f to Color.White.copy(alpha = 0.6f),
-    0.45f to Color.Transparent,
-    0.55f to Color.Transparent,
-    0.7f to Color.White.copy(alpha = 0.6f),
-    1f to Color.White,
-  )
-
-  Box(
-    modifier = modifier.height(WHEEL_ITEM_HEIGHT * WHEEL_VISIBLE_ITEMS),
-    contentAlignment = Alignment.Center,
-  ) {
-    Box(
-      modifier = Modifier
-        .fillMaxWidth()
-        .height(WHEEL_ITEM_HEIGHT)
-        .padding(horizontal = 4.dp)
-        .background(Orange100.copy(alpha = 0.5f), RoundedCornerShape(12.dp)),
-    )
-
-    LazyColumn(
-      state = listState,
-      modifier = Modifier
-        .fillMaxWidth()
-        .height(WHEEL_ITEM_HEIGHT * WHEEL_VISIBLE_ITEMS)
-        .drawWithContent {
-          drawContent()
-          drawRect(brush = topFade)
-        },
-      horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-      items(halfVisible) { Spacer(modifier = Modifier.height(WHEEL_ITEM_HEIGHT)) }
-
-      items(items.size) { index ->
-        val item = items[index]
-        val isSelected = item == selectedItem
-
-        Box(
-          modifier = Modifier.fillMaxWidth().height(WHEEL_ITEM_HEIGHT),
-          contentAlignment = Alignment.Center,
-        ) {
-          Text(
-            text = label(item),
-            fontSize = if (isSelected) 20.sp else 16.sp,
-            fontWeight = if (isSelected) FontWeight.ExtraBold else FontWeight.Medium,
-            color = if (isSelected) Orange900 else Orange900.copy(alpha = 0.35f),
-            textAlign = TextAlign.Center,
-          )
-        }
-      }
-
-      items(halfVisible) { Spacer(modifier = Modifier.height(WHEEL_ITEM_HEIGHT)) }
     }
   }
 }
