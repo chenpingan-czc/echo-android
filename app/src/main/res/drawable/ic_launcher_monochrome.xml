@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  童话屋 App 图标 - 单色层（Android 13+ 主题图标）
+  系统会忽略颜色，只取轮廓 alpha，再用主题色填充
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 星星 -->
+    <path
+        android:pathData="M54,22 L56.5,29.2 L64,29.2 L57.9,33.6 L60.2,40.8 L54,36.4 L47.8,40.8 L50.1,33.6 L44,29.2 L51.5,29.2 Z"
+        android:fillColor="#000000" />
+
+    <!-- 屋顶 + 烟囱 + 屋身（合并为一个轮廓） -->
+    <path
+        android:pathData="M30,58 L54,38 L67.5,49.25 L67.5,43 L72.5,43 L72.5,53.4 L78,58 L76.5,58 L76.5,80 Q76.5,84 72.5,84 L35.5,84 Q31.5,84 31.5,80 L31.5,58 Z"
+        android:fillColor="#000000" />
+
+    <!-- 翻开的书（镂空） -->
+    <path
+        android:pathData="M38,64.2 Q47,63 54,66 Q61,63 70,64.2 L70,80 Q61,78.4 54,80 Q47,78.4 38,80 Z"
+        android:fillColor="#FFFAF0" />
+
+    <!-- 书脊（细线） -->
+    <path
+        android:pathData="M54,66 L54,80"
+        android:strokeColor="#000000"
+        android:strokeWidth="0.8" />
+
+</vector>

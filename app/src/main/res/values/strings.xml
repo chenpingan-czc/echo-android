@@ -1,0 +1,170 @@
+<resources>
+    <string name="app_name">童话屋</string>
+
+    <!-- common -->
+    <string name="common_back">返回</string>
+    <string name="common_cancel">取消</string>
+    <string name="common_confirm">确定</string>
+    <string name="common_retry">重试</string>
+    <string name="common_done">完成</string>
+    <string name="common_edit">编辑</string>
+    <string name="common_delete">删除</string>
+    <string name="common_avatar">头像</string>
+
+    <!-- splash -->
+    <string name="splash_title">童话屋</string>
+    <string name="splash_subtitle">每天一个好故事</string>
+
+    <!-- main -->
+    <string name="main_tab_home">首页</string>
+    <string name="main_tab_profile">我的</string>
+    <string name="main_upload">上传</string>
+
+    <!-- login -->
+    <string name="login_title">童话屋</string>
+    <string name="login_phone_placeholder">请输入手机号</string>
+    <string name="login_code_label">验证码</string>
+    <string name="login_send_code">获取验证码</string>
+    <string name="login_countdown">%1$d秒</string>
+    <string name="login_entering">正在进入...</string>
+    <string name="login_start">开 始 玩 耍</string>
+    <string name="login_or">  或  </string>
+    <string name="login_signing_in">正在登录...</string>
+    <string name="login_google">使用 Google 账号登录</string>
+    <string name="login_agreement_prefix">登录即同意 </string>
+    <string name="login_agreement_terms">用户协议</string>
+    <string name="login_agreement_and"> 与 </string>
+    <string name="login_agreement_privacy">儿童隐私政策</string>
+    <string name="login_failed">登录失败</string>
+    <string name="login_google_failed">Google 登录失败</string>
+
+    <!-- home -->
+    <string name="home_error_fetch_failed">暂时无法获取首页数据</string>
+    <string name="home_load_failed">首页加载失败了</string>
+    <string name="home_section_continue">继续听</string>
+    <string name="home_section_my_books">我的绘本</string>
+    <string name="home_section_featured">精选故事</string>
+    <string name="home_welcome">欢迎来到童话屋！🏰</string>
+    <string name="home_subtitle">今天想听什么故事呢？</string>
+    <string name="home_user_default_initial">宝</string>
+    <string name="home_more">更多</string>
+    <string name="home_processing">制作中</string>
+    <string name="home_processing_progress">制作中 %1$d%%</string>
+    <string name="home_load_failed_message">加载失败，请稍后重试</string>
+    <string name="home_network_error">网络异常，请检查网络后重试</string>
+
+    <!-- my books -->
+    <string name="my_books_title">我的绘本</string>
+    <string name="my_books_empty_title">哎呀，这里空空的</string>
+    <string name="my_books_empty_subtitle">快去制作你的第一本专属绘本吧！</string>
+    <string name="my_books_processing_progress">制作中 %1$d%%</string>
+    <string name="my_books_selected">已选中</string>
+    <string name="my_books_delete">删除</string>
+    <string name="my_books_delete_with_count">删除 (%1$d)</string>
+    <string name="my_books_delete_confirm">确定删除这 %1$d 本绘本吗？</string>
+    <string name="my_books_delete_cancel">再想想</string>
+    <string name="my_books_delete_ok">确认删除</string>
+    <string name="my_books_load_failed">加载失败</string>
+    <string name="my_books_network_error">网络错误</string>
+
+    <!-- my voice -->
+    <string name="my_voice_title">我的声音</string>
+    <string name="my_voice_empty_title">哎呀，这里空空的</string>
+    <string name="my_voice_empty_subtitle">快去录制你的专属声音吧！</string>
+    <string name="my_voice_play">播放录音</string>
+    <string name="my_voice_delete">删除</string>
+    <string name="my_voice_delete_with_count">删除 (%1$d)</string>
+    <string name="my_voice_delete_confirm">确定删除这 %1$d 个声音吗？</string>
+    <string name="my_voice_delete_ok">确认删除</string>
+    <string name="my_voice_delete_cancel">再想想</string>
+    <string name="my_voice_record_new">录制新声音</string>
+
+    <!-- record voice -->
+    <string name="record_voice_prompt">请用自然的声音朗读以下段落</string>
+    <string name="record_voice_creating">声音创建中…</string>
+    <string name="record_voice_title">录制专属声音</string>
+    <string name="record_voice_stop">停止</string>
+    <string name="record_voice_start">开始录制</string>
+    <string name="record_voice_pick_audio">或者从手机选择音频</string>
+    <string name="record_voice_audio_selected">音频选择完成</string>
+    <string name="record_voice_complete">录制完成 (%1$s)</string>
+    <string name="record_voice_reselect">重新选择</string>
+    <string name="record_voice_rerecord">重录</string>
+    <string name="record_voice_save">保存声音</string>
+    <string name="record_voice_name_prompt">给声音起个名字吧</string>
+    <string name="record_voice_name_placeholder">例如：温柔妈妈音</string>
+    <string name="record_voice_dialog_cancel">取消</string>
+    <string name="record_voice_dialog_confirm">确认</string>
+
+    <!-- upload -->
+    <string name="upload_camera_unavailable">无法访问相机</string>
+    <string name="upload_camera_hint">您可以点击左下角按钮从相册中选择图片，\n或检查相机权限设置</string>
+    <string name="upload_need_cover">请先拍摄封面</string>
+    <string name="upload_choose_voice">选择讲故事的声音</string>
+    <string name="upload_choose_voice_cd">选择音色</string>
+    <string name="upload_record_my_voice">去录制我的声音</string>
+    <string name="upload_album">相册</string>
+    <string name="upload_done">完成</string>
+    <string name="upload_processing_title">施展魔法中...</string>
+    <string name="upload_processing_subtitle">正在把图片变成会讲故事的绘本</string>
+    <string name="upload_need_image">请至少选择一张图片</string>
+    <string name="upload_failed_retry">上传失败，请重试</string>
+    <string name="upload_failed_with_reason">上传失败：%1$s</string>
+    <string name="upload_image_read_failed">无法读取图片：%1$s</string>
+
+    <!-- player -->
+    <string name="player_retry">重试</string>
+    <string name="player_empty">哎呀，这本故事还没有内容哦</string>
+    <string name="player_prev">上一页</string>
+    <string name="player_next">下一页</string>
+    <string name="player_play">播放</string>
+    <string name="player_pause">暂停</string>
+    <string name="player_load_failed">加载失败</string>
+    <string name="player_network_error">网络错误</string>
+
+    <!-- edit profile -->
+    <string name="edit_profile_title">编辑资料</string>
+    <string name="edit_profile_change_avatar">更换头像</string>
+    <string name="edit_profile_nickname_label">宝贝小名</string>
+    <string name="edit_profile_nickname_placeholder">请输入宝贝小名</string>
+    <string name="edit_profile_birthday_label">出生日期</string>
+    <string name="edit_profile_birthday_placeholder">请选择出生日期</string>
+    <string name="edit_profile_birthday_format">%1$s年%2$d月%3$d日</string>
+    <string name="edit_profile_save">保存修改</string>
+    <string name="edit_profile_dialog_title">选择出生日期</string>
+    <string name="edit_profile_dialog_cancel">取消</string>
+    <string name="edit_profile_dialog_confirm">确定</string>
+    <string name="edit_profile_wheel_year">%1$d年</string>
+    <string name="edit_profile_wheel_month">%1$d月</string>
+    <string name="edit_profile_wheel_day">%1$d日</string>
+    <string name="edit_profile_save_success">保存成功！</string>
+    <string name="edit_profile_load_failed">加载失败</string>
+    <string name="edit_profile_avatar_upload_failed">头像上传失败</string>
+    <string name="edit_profile_nickname_empty">昵称不能为空</string>
+    <string name="edit_profile_save_failed">保存失败</string>
+
+    <!-- profile -->
+    <string name="profile_my_books">我的绘本</string>
+    <string name="profile_my_voice">我的声音</string>
+    <string name="profile_about">关于我们</string>
+    <string name="profile_user_default_initial">宝</string>
+    <string name="profile_edit">编辑</string>
+    <string name="profile_books_listened">已听过 %1$d 个故事</string>
+    <string name="profile_logout">退出登录</string>
+    <string name="profile_logout_confirm">真的要退出吗？</string>
+    <string name="profile_logout_cancel">取消</string>
+    <string name="profile_logout_ok">确认退出</string>
+
+    <!-- about -->
+    <string name="about_title">关于我们</string>
+    <string name="about_logo_cd">童话屋</string>
+    <string name="about_app_name">童话屋</string>
+    <string name="about_version">版本 v%1$s</string>
+    <string name="about_terms_title">用户协议</string>
+    <string name="about_privacy_title">儿童隐私政策</string>
+    <string name="about_copyright">Copyright © 2026 童话屋</string>
+    <string name="about_made_with_love">为小朋友用心制作</string>
+
+    <!-- web view -->
+    <string name="web_view_load_failed">加载失败: %1$s</string>
+</resources>

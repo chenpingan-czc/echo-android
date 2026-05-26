@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  网络安全配置：
+  - 默认禁止明文 HTTP，所有线上流量必须走 HTTPS（满足 Google Play 安全审核要求）。
+  - 仅对开发联调用的内网地址放开 HTTP，方便 debug 包连接本地 echo-server。
+  - release 包的 BASE_URL 是 https://ipush.chat/，不会命中下面的内网白名单。
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- 开发联调专用：以下地址允许 HTTP，仅会在 debug 构建中实际命中 -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">192.168.10.203</domain>
+        <domain includeSubdomains="false">192.168.2.172</domain>
+        <domain includeSubdomains="false">10.0.2.2</domain>
+        <domain includeSubdomains="false">localhost</domain>
+    </domain-config>
+</network-security-config>

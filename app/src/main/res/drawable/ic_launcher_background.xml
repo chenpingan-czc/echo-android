@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  童话屋 App 图标 - 背景层
+  橙红渐变 + 角落装饰星点（启动器视差时若隐若现）
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 渐变底色 -->
+    <path android:pathData="M0,0 L108,0 L108,108 L0,108 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="54"
+                android:startY="0"
+                android:endX="54"
+                android:endY="108"
+                android:type="linear">
+                <item android:offset="0.0" android:color="#FF9966" />
+                <item android:offset="1.0" android:color="#EE4D2D" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- 装饰小星点（柔和奶白色） -->
+    <path
+        android:pathData="M16,20 m-1.6,0 a1.6,1.6 0 1,0 3.2,0 a1.6,1.6 0 1,0 -3.2,0 Z"
+        android:fillColor="#FFE5D0"
+        android:fillAlpha="0.55" />
+    <path
+        android:pathData="M21,27 m-0.8,0 a0.8,0.8 0 1,0 1.6,0 a0.8,0.8 0 1,0 -1.6,0 Z"
+        android:fillColor="#FFE5D0"
+        android:fillAlpha="0.45" />
+    <path
+        android:pathData="M92,22 m-1.8,0 a1.8,1.8 0 1,0 3.6,0 a1.8,1.8 0 1,0 -3.6,0 Z"
+        android:fillColor="#FFE5D0"
+        android:fillAlpha="0.55" />
+    <path
+        android:pathData="M86,15 m-1.0,0 a1.0,1.0 0 1,0 2.0,0 a1.0,1.0 0 1,0 -2.0,0 Z"
+        android:fillColor="#FFE5D0"
+        android:fillAlpha="0.45" />
+    <path
+        android:pathData="M18,90 m-1.3,0 a1.3,1.3 0 1,0 2.6,0 a1.3,1.3 0 1,0 -2.6,0 Z"
+        android:fillColor="#FFE5D0"
+        android:fillAlpha="0.55" />
+    <path
+        android:pathData="M90,88 m-1.6,0 a1.6,1.6 0 1,0 3.2,0 a1.6,1.6 0 1,0 -3.2,0 Z"
+        android:fillColor="#FFE5D0"
+        android:fillAlpha="0.55" />
+    <path
+        android:pathData="M95,80 m-0.8,0 a0.8,0.8 0 1,0 1.6,0 a0.8,0.8 0 1,0 -1.6,0 Z"
+        android:fillColor="#FFE5D0"
+        android:fillAlpha="0.45" />
+
+</vector>

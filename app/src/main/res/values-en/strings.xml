@@ -1,0 +1,170 @@
+<resources>
+    <string name="app_name">echo</string>
+
+    <!-- common -->
+    <string name="common_back">Back</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_confirm">OK</string>
+    <string name="common_retry">Retry</string>
+    <string name="common_done">Done</string>
+    <string name="common_edit">Edit</string>
+    <string name="common_delete">Delete</string>
+    <string name="common_avatar">Avatar</string>
+
+    <!-- splash -->
+    <string name="splash_title">Story House</string>
+    <string name="splash_subtitle">A great story every day</string>
+
+    <!-- main -->
+    <string name="main_tab_home">Home</string>
+    <string name="main_tab_profile">Me</string>
+    <string name="main_upload">Upload</string>
+
+    <!-- login -->
+    <string name="login_title">Story House</string>
+    <string name="login_phone_placeholder">Enter your phone number</string>
+    <string name="login_code_label">Code</string>
+    <string name="login_send_code">Get code</string>
+    <string name="login_countdown">%1$ds</string>
+    <string name="login_entering">Entering...</string>
+    <string name="login_start">Let\'s Play</string>
+    <string name="login_or">  or  </string>
+    <string name="login_signing_in">Signing in...</string>
+    <string name="login_google">Sign in with Google</string>
+    <string name="login_agreement_prefix">By signing in you agree to the </string>
+    <string name="login_agreement_terms">Terms of Service</string>
+    <string name="login_agreement_and"> and </string>
+    <string name="login_agreement_privacy">Children\'s Privacy Policy</string>
+    <string name="login_failed">Sign-in failed</string>
+    <string name="login_google_failed">Google sign-in failed</string>
+
+    <!-- home -->
+    <string name="home_error_fetch_failed">Couldn\'t load the home page right now</string>
+    <string name="home_load_failed">Failed to load home page</string>
+    <string name="home_section_continue">Continue Listening</string>
+    <string name="home_section_my_books">My Books</string>
+    <string name="home_section_featured">Featured Stories</string>
+    <string name="home_welcome">Welcome to Story House! 🏰</string>
+    <string name="home_subtitle">What story shall we listen to today?</string>
+    <string name="home_user_default_initial">B</string>
+    <string name="home_more">More</string>
+    <string name="home_processing">Creating</string>
+    <string name="home_processing_progress">Creating %1$d%%</string>
+    <string name="home_load_failed_message">Failed to load. Please try again later.</string>
+    <string name="home_network_error">Network error. Please check your connection and retry.</string>
+
+    <!-- my books -->
+    <string name="my_books_title">My Books</string>
+    <string name="my_books_empty_title">Oops, it\'s empty here</string>
+    <string name="my_books_empty_subtitle">Go create your very first book!</string>
+    <string name="my_books_processing_progress">Creating %1$d%%</string>
+    <string name="my_books_selected">Selected</string>
+    <string name="my_books_delete">Delete</string>
+    <string name="my_books_delete_with_count">Delete (%1$d)</string>
+    <string name="my_books_delete_confirm">Delete these %1$d books?</string>
+    <string name="my_books_delete_cancel">Not now</string>
+    <string name="my_books_delete_ok">Confirm delete</string>
+    <string name="my_books_load_failed">Failed to load</string>
+    <string name="my_books_network_error">Network error</string>
+
+    <!-- my voice -->
+    <string name="my_voice_title">My Voice</string>
+    <string name="my_voice_empty_title">Oops, it\'s empty here</string>
+    <string name="my_voice_empty_subtitle">Go record your own voice!</string>
+    <string name="my_voice_play">Play recording</string>
+    <string name="my_voice_delete">Delete</string>
+    <string name="my_voice_delete_with_count">Delete (%1$d)</string>
+    <string name="my_voice_delete_confirm">Delete these %1$d voices?</string>
+    <string name="my_voice_delete_ok">Confirm delete</string>
+    <string name="my_voice_delete_cancel">Not now</string>
+    <string name="my_voice_record_new">Record New Voice</string>
+
+    <!-- record voice -->
+    <string name="record_voice_prompt">Please read the passage below in your natural voice</string>
+    <string name="record_voice_creating">Creating your voice…</string>
+    <string name="record_voice_title">Record My Voice</string>
+    <string name="record_voice_stop">Stop</string>
+    <string name="record_voice_start">Start recording</string>
+    <string name="record_voice_pick_audio">Or pick an audio file</string>
+    <string name="record_voice_audio_selected">Audio selected</string>
+    <string name="record_voice_complete">Recording complete (%1$s)</string>
+    <string name="record_voice_reselect">Pick again</string>
+    <string name="record_voice_rerecord">Re-record</string>
+    <string name="record_voice_save">Save voice</string>
+    <string name="record_voice_name_prompt">Give your voice a name</string>
+    <string name="record_voice_name_placeholder">e.g. Gentle Mommy Voice</string>
+    <string name="record_voice_dialog_cancel">Cancel</string>
+    <string name="record_voice_dialog_confirm">OK</string>
+
+    <!-- upload -->
+    <string name="upload_camera_unavailable">Can\'t access the camera</string>
+    <string name="upload_camera_hint">Tap the button on the bottom left to pick from your gallery,\nor check your camera permission settings</string>
+    <string name="upload_need_cover">Please take a cover photo first</string>
+    <string name="upload_choose_voice">Choose a storytelling voice</string>
+    <string name="upload_choose_voice_cd">Choose voice</string>
+    <string name="upload_record_my_voice">Record My Voice</string>
+    <string name="upload_album">Album</string>
+    <string name="upload_done">Done</string>
+    <string name="upload_processing_title">Creating magic...</string>
+    <string name="upload_processing_subtitle">Turning your pictures into a story book</string>
+    <string name="upload_need_image">Please select at least one image</string>
+    <string name="upload_failed_retry">Upload failed, please try again</string>
+    <string name="upload_failed_with_reason">Upload failed: %1$s</string>
+    <string name="upload_image_read_failed">Can\'t read image: %1$s</string>
+
+    <!-- player -->
+    <string name="player_retry">Retry</string>
+    <string name="player_empty">Oops, this story doesn\'t have any content yet</string>
+    <string name="player_prev">Previous page</string>
+    <string name="player_next">Next page</string>
+    <string name="player_play">Play</string>
+    <string name="player_pause">Pause</string>
+    <string name="player_load_failed">Failed to load</string>
+    <string name="player_network_error">Network error</string>
+
+    <!-- edit profile -->
+    <string name="edit_profile_title">Edit Profile</string>
+    <string name="edit_profile_change_avatar">Change avatar</string>
+    <string name="edit_profile_nickname_label">Nickname</string>
+    <string name="edit_profile_nickname_placeholder">Enter a nickname</string>
+    <string name="edit_profile_birthday_label">Birthday</string>
+    <string name="edit_profile_birthday_placeholder">Pick a birthday</string>
+    <string name="edit_profile_birthday_format">%1$s-%2$02d-%3$02d</string>
+    <string name="edit_profile_save">Save</string>
+    <string name="edit_profile_dialog_title">Pick birthday</string>
+    <string name="edit_profile_dialog_cancel">Cancel</string>
+    <string name="edit_profile_dialog_confirm">OK</string>
+    <string name="edit_profile_wheel_year">%1$d</string>
+    <string name="edit_profile_wheel_month">%1$d</string>
+    <string name="edit_profile_wheel_day">%1$d</string>
+    <string name="edit_profile_save_success">Saved!</string>
+    <string name="edit_profile_load_failed">Failed to load</string>
+    <string name="edit_profile_avatar_upload_failed">Avatar upload failed</string>
+    <string name="edit_profile_nickname_empty">Nickname can\'t be empty</string>
+    <string name="edit_profile_save_failed">Failed to save</string>
+
+    <!-- profile -->
+    <string name="profile_my_books">My Books</string>
+    <string name="profile_my_voice">My Voice</string>
+    <string name="profile_about">About</string>
+    <string name="profile_user_default_initial">B</string>
+    <string name="profile_edit">Edit</string>
+    <string name="profile_books_listened">Listened to %1$d stories</string>
+    <string name="profile_logout">Log out</string>
+    <string name="profile_logout_confirm">Are you sure you want to log out?</string>
+    <string name="profile_logout_cancel">Cancel</string>
+    <string name="profile_logout_ok">Log out</string>
+
+    <!-- about -->
+    <string name="about_title">About</string>
+    <string name="about_logo_cd">Story House</string>
+    <string name="about_app_name">Story House</string>
+    <string name="about_version">Version v%1$s</string>
+    <string name="about_terms_title">Terms of Service</string>
+    <string name="about_privacy_title">Children\'s Privacy Policy</string>
+    <string name="about_copyright">Copyright © 2026 Story House</string>
+    <string name="about_made_with_love">Made with love for kids</string>
+
+    <!-- web view -->
+    <string name="web_view_load_failed">Failed to load: %1$s</string>
+</resources>
