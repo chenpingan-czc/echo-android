@@ -614,7 +614,7 @@ private fun CameraHeader(
             horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally),
             verticalAlignment = Alignment.CenterVertically,
           ) {
-            DemoCoverHint(painterResource(R.drawable.demo1))
+            DemoCoverHint(painterResource(R.drawable.demo1), rotate180 = true)
             DemoCoverHint(painterResource(R.drawable.demo2))
             DemoCoverHint(painterResource(R.drawable.demo3))
           }
@@ -646,7 +646,10 @@ private fun CameraHeader(
 }
 
 @Composable
-private fun DemoCoverHint(painter: androidx.compose.ui.graphics.painter.Painter) {
+private fun DemoCoverHint(
+  painter: androidx.compose.ui.graphics.painter.Painter,
+  rotate180: Boolean = false,
+) {
   Image(
     painter = painter,
     contentDescription = null,
@@ -655,7 +658,7 @@ private fun DemoCoverHint(painter: androidx.compose.ui.graphics.painter.Painter)
       .size(68.dp, 52.dp)
       .clip(RoundedCornerShape(10.dp))
       .border(1.5.dp, Color.White.copy(alpha = 0.7f), RoundedCornerShape(10.dp))
-      .rotate(180f),
+      .then(if (rotate180) Modifier.rotate(180f) else Modifier),
   )
 }
 
