@@ -11,7 +11,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import android.app.Activity
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -32,6 +34,10 @@ import com.hope.echo.ui.viewmodel.LoginViewModel
 import java.net.URLDecoder
 import java.net.URLEncoder
 import kotlinx.coroutines.launch
+
+private inline fun NavBackStackEntry.ifResumed(action: () -> Unit) {
+  if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) action()
+}
 
 object Routes {
   const val SPLASH = "splash"
@@ -73,18 +79,20 @@ fun AppNavigation(onComposeReady: () -> Unit = {}) {
   }
 
   NavHost(navController = navController, startDestination = Routes.SPLASH) {
-    composable(Routes.SPLASH) {
+    composable(Routes.SPLASH) { entry ->
       LaunchedEffect(Unit) { onComposeReady() }
       SplashScreen(
         onTimeout = {
           if (!checkedAuth) return@SplashScreen
-          val target = if (isLoggedIn) Routes.HOME else Routes.LOGIN
-          navController.navigate(target) { popUpTo(Routes.SPLASH) { inclusive = true } }
+          entry.ifResumed {
+            val target = if (isLoggedIn) Routes.HOME else Routes.LOGIN
+            navController.navigate(target) { popUpTo(Routes.SPLASH) { inclusive = true } }
+          }
         }
       )
     }
 
-    composable(Routes.LOGIN) {
+    composable(Routes.LOGIN) { entry ->
       val loginViewModel: LoginViewModel = viewModel()
       val uiState by loginViewModel.uiState.collectAsState()
       val activity = LocalContext.current as Activity
@@ -108,98 +116,116 @@ fun AppNavigation(onComposeReady: () -> Unit = {}) {
         onLogin = loginViewModel::login,
         onGoogleSignIn = { loginViewModel.googleSignIn(activity) },
         onNavigateToWebView = { title, url ->
-          navController.navigate(Routes.webView(title, url))
+          entry.ifResumed { navController.navigate(Routes.webView(title, url)) }
         },
       )
     }
 
-    composable(Routes.HOME) {
+    composable(Routes.HOME) { entry ->
       MainScreen(
         refreshTrigger = homeRefreshTrigger,
-        onNavigateToUpload = { navController.navigate(Routes.UPLOAD) },
-        onNavigateToMyBooks = { navController.navigate(Routes.MY_BOOKS) },
-        onNavigateToMyVoice = { navController.navigate(Routes.MY_VOICE) },
+        onNavigateToUpload = { entry.ifResumed { navController.navigate(Routes.UPLOAD) } },
+        onNavigateToMyBooks = { entry.ifResumed { navController.navigate(Routes.MY_BOOKS) } },
+        onNavigateToMyVoice = { entry.ifResumed { navController.navigate(Routes.MY_VOICE) } },
         profileRefreshTrigger = profileRefreshTrigger,
-        onNavigateToEditProfile = { navController.navigate(Routes.EDIT_PROFILE) },
-        onNavigateToAbout = { navController.navigate(Routes.ABOUT) },
-        onNavigateToPlayer = { bookId -> navController.navigate(Routes.player(bookId)) },
+        onNavigateToEditProfile = { entry.ifResumed { navController.navigate(Routes.EDIT_PROFILE) } },
+        onNavigateToAbout = { entry.ifResumed { navController.navigate(Routes.ABOUT) } },
+        onNavigateToPlayer = { bookId ->
+          entry.ifResumed { navController.navigate(Routes.player(bookId)) }
+        },
         onLogout = {
-          scope.launch {
-            try {
-              RetrofitClient.authApi.logout()
-            } catch (_: Exception) {
-            }
-            tokenManager.clearToken()
-            navController.navigate(Routes.LOGIN) {
-              popUpTo(Routes.HOME) { inclusive = true }
+          entry.ifResumed {
+            scope.launch {
+              try {
+                RetrofitClient.authApi.logout()
+              } catch (_: Exception) {
+              }
+              tokenManager.clearToken()
+              navController.navigate(Routes.LOGIN) {
+                popUpTo(Routes.HOME) { inclusive = true }
+              }
             }
           }
         },
       )
     }
 
-    composable(Routes.PLAYER) { backStackEntry ->
-      val bookId = backStackEntry.arguments?.getString("bookId")?.toLongOrNull() ?: return@composable
-      PlayerScreen(bookId = bookId, onBack = { navController.popBackStack() })
+    composable(Routes.PLAYER) { entry ->
+      val bookId = entry.arguments?.getString("bookId")?.toLongOrNull() ?: return@composable
+      PlayerScreen(bookId = bookId, onBack = { entry.ifResumed { navController.popBackStack() } })
     }
 
-    composable(Routes.UPLOAD) {
+    composable(Routes.UPLOAD) { entry ->
       UploadScreen(
-        onBack = { navController.popBackStack() },
+        onBack = { entry.ifResumed { navController.popBackStack() } },
         onUploadSuccess = {
-          homeRefreshTrigger++
-          navController.popBackStack()
+          entry.ifResumed {
+            homeRefreshTrigger++
+            navController.popBackStack()
+          }
         },
-        onNavigateToRecordVoice = { navController.navigate(Routes.RECORD_VOICE) },
+        onNavigateToRecordVoice = {
+          entry.ifResumed { navController.navigate(Routes.RECORD_VOICE) }
+        },
       )
     }
 
-    composable(Routes.EDIT_PROFILE) {
+    composable(Routes.EDIT_PROFILE) { entry ->
       EditProfileScreen(onBack = {
-        profileRefreshTrigger++
-        navController.popBackStack()
+        entry.ifResumed {
+          profileRefreshTrigger++
+          navController.popBackStack()
+        }
       })
     }
 
-    composable(Routes.ABOUT) {
+    composable(Routes.ABOUT) { entry ->
       AboutScreen(
-        onBack = { navController.popBackStack() },
+        onBack = { entry.ifResumed { navController.popBackStack() } },
         onNavigateToWebView = { title, url ->
-          navController.navigate(Routes.webView(title, url))
+          entry.ifResumed { navController.navigate(Routes.webView(title, url)) }
         },
       )
     }
 
-    composable(Routes.MY_BOOKS) {
+    composable(Routes.MY_BOOKS) { entry ->
       MyBooksScreen(
-        onBack = { navController.popBackStack() },
-        onBookClick = { bookId -> navController.navigate(Routes.player(bookId)) },
+        onBack = { entry.ifResumed { navController.popBackStack() } },
+        onBookClick = { bookId ->
+          entry.ifResumed { navController.navigate(Routes.player(bookId)) }
+        },
       )
     }
 
-    composable(Routes.MY_VOICE) {
+    composable(Routes.MY_VOICE) { entry ->
       MyVoiceScreen(
-        onBack = { navController.popBackStack() },
-        onNavigateToRecord = { navController.navigate(Routes.RECORD_VOICE) },
+        onBack = { entry.ifResumed { navController.popBackStack() } },
+        onNavigateToRecord = { entry.ifResumed { navController.navigate(Routes.RECORD_VOICE) } },
         refreshTrigger = voiceRefreshTrigger,
       )
     }
 
-    composable(Routes.RECORD_VOICE) {
+    composable(Routes.RECORD_VOICE) { entry ->
       RecordVoiceScreen(
         onBack = {
-          voiceRefreshTrigger++
-          navController.popBackStack()
+          entry.ifResumed {
+            voiceRefreshTrigger++
+            navController.popBackStack()
+          }
         },
       )
     }
 
-    composable(Routes.WEBVIEW) { backStackEntry ->
+    composable(Routes.WEBVIEW) { entry ->
       val title =
-        URLDecoder.decode(backStackEntry.arguments?.getString("title") ?: "", "UTF-8")
+        URLDecoder.decode(entry.arguments?.getString("title") ?: "", "UTF-8")
       val url =
-        URLDecoder.decode(backStackEntry.arguments?.getString("url") ?: "", "UTF-8")
-      WebViewScreen(title = title, url = url, onBack = { navController.popBackStack() })
+        URLDecoder.decode(entry.arguments?.getString("url") ?: "", "UTF-8")
+      WebViewScreen(
+        title = title,
+        url = url,
+        onBack = { entry.ifResumed { navController.popBackStack() } },
+      )
     }
   }
 }
