@@ -70,5 +70,5 @@ interface UserApi {
   ): ApiResponse<VoiceUploadDto>
 
   @POST("api/user/voice/delete")
-  suspend fun deleteVoices(@Body request: BatchDeleteVoicesRequest): ApiResponse<Void>
+  suspend fun deleteVoices(@Body request: BatchDeleteVoicesRequest): ApiResponse<Boolean?>
 }

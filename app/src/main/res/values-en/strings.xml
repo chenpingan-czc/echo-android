@@ -68,10 +68,6 @@
     <string name="my_voice_empty_subtitle">Go record your own voice!</string>
     <string name="my_voice_play">Play recording</string>
     <string name="my_voice_delete">Delete</string>
-    <string name="my_voice_delete_with_count">Delete (%1$d)</string>
-    <string name="my_voice_delete_confirm">Delete these %1$d voices?</string>
-    <string name="my_voice_delete_ok">Confirm delete</string>
-    <string name="my_voice_delete_cancel">Not now</string>
     <string name="my_voice_record_new">Record New Voice</string>
 
     <!-- record voice -->

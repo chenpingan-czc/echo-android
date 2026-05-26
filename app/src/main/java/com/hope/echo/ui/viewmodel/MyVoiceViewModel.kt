@@ -29,6 +29,8 @@ data class MyVoiceUiState(
   val playProgress: Float = 0f,
   val error: String? = null,
   val promptText: String? = null,
+  val pendingDeleteVoiceId: Long? = null,
+  val deletingVoiceId: Long? = null,
 )
 
 class MyVoiceViewModel : ViewModel() {
@@ -46,13 +48,7 @@ class MyVoiceViewModel : ViewModel() {
 
   fun loadVoices() {
     viewModelScope.launch {
-      _uiState.update { it.copy(isLoading = true, error = null) }
-      try {
-        val resp = RetrofitClient.userApi.getVoiceList()
-        _uiState.update { it.copy(voices = resp.data ?: emptyList(), isLoading = false) }
-      } catch (e: Exception) {
-        _uiState.update { it.copy(isLoading = false, error = e.message) }
-      }
+      fetchVoices(showLoading = true)
     }
   }
 
@@ -96,15 +92,50 @@ class MyVoiceViewModel : ViewModel() {
     }
   }
 
-  fun deleteVoices(voiceIds: Collection<Long>) {
-    if (voiceIds.isEmpty()) return
+  fun showDeleteAction(voiceId: Long) {
+    if (_uiState.value.deletingVoiceId != null) return
+    stopPlayback()
+    _uiState.update { it.copy(pendingDeleteVoiceId = voiceId) }
+  }
+
+  fun dismissDeleteAction() {
+    if (_uiState.value.deletingVoiceId != null) return
+    _uiState.update { it.copy(pendingDeleteVoiceId = null) }
+  }
+
+  fun deleteVoice(voiceId: Long) {
+    if (_uiState.value.deletingVoiceId != null) return
     viewModelScope.launch {
+      _uiState.update { it.copy(deletingVoiceId = voiceId) }
       try {
-        RetrofitClient.userApi.deleteVoices(BatchDeleteVoicesRequest(voiceIds.toList()))
-        // 删除成功后从服务端重新拉取最新的「我的声音」列表
-        loadVoices()
+        val resp = RetrofitClient.userApi.deleteVoices(BatchDeleteVoicesRequest(listOf(voiceId)))
+        if (resp.isSuccess()) {
+          _uiState.update {
+            it.copy(
+              voices = it.voices.filterNot { voice -> voice.id == voiceId },
+              pendingDeleteVoiceId = null,
+              deletingVoiceId = null,
+            )
+          }
+          fetchVoices(showLoading = false)
+        } else {
+          _uiState.update { it.copy(deletingVoiceId = null) }
+        }
       } catch (_: Exception) {
+        _uiState.update { it.copy(deletingVoiceId = null) }
       }
+    }
+  }
+
+  private suspend fun fetchVoices(showLoading: Boolean) {
+    if (showLoading) {
+      _uiState.update { it.copy(isLoading = true, error = null) }
+    }
+    try {
+      val resp = RetrofitClient.userApi.getVoiceList()
+      _uiState.update { it.copy(voices = resp.data ?: emptyList(), isLoading = false) }
+    } catch (e: Exception) {
+      _uiState.update { it.copy(isLoading = false, error = e.message) }
     }
   }
 
