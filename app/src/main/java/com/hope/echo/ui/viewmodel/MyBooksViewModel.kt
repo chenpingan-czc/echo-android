@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.hope.echo.R
-import com.hope.echo.data.api.BatchDeleteBookRequest
 import com.hope.echo.data.api.BookCardDto
+import com.hope.echo.data.api.DeleteBookRequest
 import com.hope.echo.data.api.RetrofitClient
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,10 +17,8 @@ data class MyBooksUiState(
   val isRefreshing: Boolean = false,
   val books: List<BookCardDto> = emptyList(),
   val errorMessage: String? = null,
-  val isEditing: Boolean = false,
-  val selectedBookIds: Set<Long> = emptySet(),
-  val showDeleteConfirm: Boolean = false,
-  val isDeleting: Boolean = false,
+  val pendingDeleteBookId: Long? = null,
+  val deletingBookId: Long? = null,
 )
 
 class MyBooksViewModel(application: Application) : AndroidViewModel(application) {
@@ -49,62 +47,37 @@ class MyBooksViewModel(application: Application) : AndroidViewModel(application)
     }
   }
 
-  fun toggleEditMode() {
-    val current = _uiState.value
-    if (current.isEditing) {
-      _uiState.value = current.copy(isEditing = false, selectedBookIds = emptySet())
-    } else {
-      _uiState.value = current.copy(isEditing = true, selectedBookIds = emptySet())
-    }
+  fun showDeleteAction(bookId: Long) {
+    if (_uiState.value.deletingBookId != null) return
+    _uiState.value = _uiState.value.copy(pendingDeleteBookId = bookId)
   }
 
-  fun toggleBookSelection(bookId: Long) {
-    val current = _uiState.value
-    val newSelected = current.selectedBookIds.toMutableSet()
-    if (newSelected.contains(bookId)) {
-      newSelected.remove(bookId)
-    } else {
-      newSelected.add(bookId)
-    }
-    _uiState.value = current.copy(selectedBookIds = newSelected)
+  fun dismissDeleteAction() {
+    if (_uiState.value.deletingBookId != null) return
+    _uiState.value = _uiState.value.copy(pendingDeleteBookId = null)
   }
 
-  fun showDeleteConfirm() {
-    if (_uiState.value.selectedBookIds.isNotEmpty()) {
-      _uiState.value = _uiState.value.copy(showDeleteConfirm = true)
-    }
-  }
-
-  fun dismissDeleteConfirm() {
-    _uiState.value = _uiState.value.copy(showDeleteConfirm = false)
-  }
-
-  fun confirmBatchDelete() {
-    val ids = _uiState.value.selectedBookIds.toList()
-    if (ids.isEmpty()) return
+  fun deleteBook(bookId: Long) {
+    if (_uiState.value.deletingBookId != null) return
     viewModelScope.launch {
-      _uiState.value = _uiState.value.copy(isDeleting = true)
+      _uiState.value = _uiState.value.copy(deletingBookId = bookId)
       try {
-        val response = bookApi.batchDeleteBooks(BatchDeleteBookRequest(ids))
-        if (response.code == 0) {
-          // 删除成功：关闭弹窗、退出编辑态，并从服务端重新拉取最新列表
+        val response = bookApi.deleteBook(DeleteBookRequest(bookId))
+        if (response.isSuccess()) {
           _uiState.value = _uiState.value.copy(
-            selectedBookIds = emptySet(),
-            isEditing = false,
-            showDeleteConfirm = false,
-            isDeleting = false,
+            books = _uiState.value.books.filterNot { it.id == bookId },
+            pendingDeleteBookId = null,
+            deletingBookId = null,
           )
           fetchBooks(keepExistingOnError = true)
         } else {
           _uiState.value = _uiState.value.copy(
-            showDeleteConfirm = false,
-            isDeleting = false,
+            deletingBookId = null,
           )
         }
       } catch (_: Exception) {
         _uiState.value = _uiState.value.copy(
-          showDeleteConfirm = false,
-          isDeleting = false,
+          deletingBookId = null,
         )
       }
     }

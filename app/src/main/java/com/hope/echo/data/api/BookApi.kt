@@ -19,7 +19,6 @@ data class BookVoiceDto(
 data class ReportListenHistoryRequest(val bookId: Long)
 
 data class DeleteBookRequest(val bookId: Long)
-data class BatchDeleteBookRequest(val bookIds: List<Long>)
 
 data class ListenedCountDto(val count: Int)
 
@@ -60,10 +59,7 @@ interface BookApi {
   suspend fun myBooks(): ApiResponse<List<BookCardDto>>
 
   @POST("api/book/delete")
-  suspend fun deleteBook(@Body request: DeleteBookRequest): ApiResponse<Unit?>
-
-  @POST("api/book/batchDelete")
-  suspend fun batchDeleteBooks(@Body request: BatchDeleteBookRequest): ApiResponse<Unit?>
+  suspend fun deleteBook(@Body request: DeleteBookRequest): ApiResponse<Boolean?>
 
   @GET("api/book/listenedCount")
   suspend fun listenedCount(): ApiResponse<ListenedCountDto>

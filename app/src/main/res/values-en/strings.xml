@@ -58,12 +58,7 @@
     <string name="my_books_empty_title">Oops, it\'s empty here</string>
     <string name="my_books_empty_subtitle">Go create your very first book!</string>
     <string name="my_books_processing_progress">Creating %1$d%%</string>
-    <string name="my_books_selected">Selected</string>
     <string name="my_books_delete">Delete</string>
-    <string name="my_books_delete_with_count">Delete (%1$d)</string>
-    <string name="my_books_delete_confirm">Delete these %1$d books?</string>
-    <string name="my_books_delete_cancel">Not now</string>
-    <string name="my_books_delete_ok">Confirm delete</string>
     <string name="my_books_load_failed">Failed to load</string>
     <string name="my_books_network_error">Network error</string>
 
